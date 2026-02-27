@@ -282,27 +282,6 @@
                 }
             }
         },
-        "/api/auth/reset-email": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "emailAddress",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
         "/api/auth/confirm-reset-email": {
             "post": {
                 "tags": [
@@ -326,7 +305,24 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StringApiResponse"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StringApiResponse"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StringApiResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1879,9 +1875,6 @@
                     "isDeleted": {
                         "type": "boolean"
                     },
-                    "isLogin": {
-                        "type": "boolean"
-                    },
                     "isActive": {
                         "type": "boolean"
                     },
@@ -1906,9 +1899,6 @@
                     },
                     "otpLifeTime": {
                         "format": "date-time",
-                        "type": "string"
-                    },
-                    "refreshToken": {
                         "type": "string"
                     },
                     "fcmToken": {

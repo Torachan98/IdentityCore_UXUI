@@ -23,7 +23,6 @@ export type UserDTO = {
     isRequiredChangePassword?: boolean;
     isPasswordExpired?: boolean;
     isDeleted?: boolean;
-    isLogin?: boolean;
     isActive?: boolean;
     otpCode?: string;
     attemptLogin?: number;
@@ -31,7 +30,6 @@ export type UserDTO = {
     lastLogin?: string;
     expirationDate?: string;
     otpLifeTime?: string;
-    refreshToken?: string;
     fcmToken?: string;
     step?: number;
     permissions?: Array<string>;

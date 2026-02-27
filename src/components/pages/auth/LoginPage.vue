@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Input from '@/components/atoms/InputBase.vue'
 import Button from '@/components/atoms/ButtonBase.vue'
 import { useAuthStore } from '@/store/auth/auth'
 import { Step } from '@/store/user/user.types'
+import { DEVICE_ID_KEY } from '@/variable.type'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -13,6 +14,16 @@ const username = ref('')
 const password = ref('')
 
 const error = computed(() => authStore.error)
+
+onMounted(() => {
+  const deviceId = localStorage.getItem(DEVICE_ID_KEY)
+  if (!deviceId) {
+    localStorage.setItem(
+      DEVICE_ID_KEY,
+      `device_${navigator.userAgentData?.platform}_${crypto.randomUUID().slice(0, 8).toString().toUpperCase()}`,
+    )
+  }
+})
 
 const handleLogin = async (): Promise<void> => {
   const res = await authStore.signIn({

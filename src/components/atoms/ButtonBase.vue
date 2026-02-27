@@ -13,7 +13,7 @@ const buttonClass = computed(() => [
   'rounded-lg py-2 text-sm font-semibold disabled:opacity-60 cursor-pointer',
   props.isTransparent ? 'bg-transparent' : 'bg-blue-600',
   props.isTransparent ? 'hover:bg-transparent' : 'hover:bg-blue-700',
-  !props.isTransparent ? 'text-white' : '',
+  !props.isTransparent ? 'text-white' : 'hover:underline disabled:cursor-not-allowed',
 ])
 </script>
 

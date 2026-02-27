@@ -105,24 +105,7 @@ export class AuthService {
         });
     }
     /**
-     * @returns any OK
-     * @throws ApiError
-     */
-    public static postApiAuthResetEmail({
-        emailAddress,
-    }: {
-        emailAddress?: string,
-    }): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/auth/reset-email',
-            query: {
-                'emailAddress': emailAddress,
-            },
-        });
-    }
-    /**
-     * @returns any OK
+     * @returns StringApiResponse OK
      * @throws ApiError
      */
     public static postApiAuthConfirmResetEmail({
@@ -131,7 +114,7 @@ export class AuthService {
     }: {
         emailAddress?: string,
         otpCode?: string,
-    }): CancelablePromise<any> {
+    }): CancelablePromise<StringApiResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/auth/confirm-reset-email',

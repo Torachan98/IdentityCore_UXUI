@@ -11,6 +11,8 @@ import {
   type UserDTOApiResponse,
 } from '@/api/generated'
 import type { AuthInformation, AuthState } from './auth.types'
+import { DEVICE_ID_KEY } from '@/variable.type'
+import { onToast } from '../toast-generic'
 
 const initialState = (): AuthState => ({
   loading: false,
@@ -126,11 +128,45 @@ export const useAuthStore = defineStore('auth', {
 
         if (res.isSuccess) {
           Object.assign(this, initialState())
+          localStorage.setItem(DEVICE_ID_KEY, '')
         }
 
         return res
       } catch (e) {
         this.error = 'Cannot POST /api/auth/signout'
+        throw e
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async resetEmail(
+      emailAddress: string,
+      otpCode: string,
+      isToast: boolean = true,
+    ): Promise<StringApiResponse> {
+      this.loading = true
+      this.error = null
+
+      try {
+        const res = await AuthService.postApiAuthConfirmResetEmail({
+          emailAddress: emailAddress,
+          otpCode: otpCode,
+        })
+
+        this.error = res.message ?? null
+
+        if (isToast && !res.isSuccess) {
+          onToast({
+            title: 'Reset Email',
+            message: res.message ?? '',
+            icon: 'user-pen',
+          })
+        }
+
+        return res
+      } catch (e) {
+        this.error = 'Cannot POST /api/auth/re-sent-otp'
         throw e
       } finally {
         this.loading = false

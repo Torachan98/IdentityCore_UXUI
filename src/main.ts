@@ -45,14 +45,6 @@ app.use(pinia)
 
 const authStore = useAuthStore()
 
-const deviceId = localStorage.getItem(DEVICE_ID_KEY)
-if (!deviceId) {
-  localStorage.setItem(
-    DEVICE_ID_KEY,
-    `device_${navigator.userAgentData?.platform}_${crypto.randomUUID().slice(0, 8).toString().toUpperCase()}`,
-  )
-}
-
 setupInterceptors(
   () => authStore.getAccessToken(),
   () => authStore.refreshToken(),

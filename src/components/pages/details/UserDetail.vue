@@ -376,7 +376,7 @@ onUnmounted(() => {
 
             <div class="overflow-hidden rounded-lg border bg-white divide-y">
               <InfoRow label="Login status?">
-                <div v-if="user?.isLogin">
+                <!-- <div v-if="user?.isLogin">
                   <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-700">
                     Login
                   </span>
@@ -385,7 +385,7 @@ onUnmounted(() => {
                   <span className="rounded-full bg-yellow-100 px-2 py-1 text-xs text-yellow-700">
                     Logout
                   </span>
-                </div>
+                </div> -->
               </InfoRow>
 
               <InfoRow label="Latest Login:">
