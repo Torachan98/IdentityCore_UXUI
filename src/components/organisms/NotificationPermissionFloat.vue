@@ -115,7 +115,7 @@ const handleDismiss = (): void => {
 </script>
 
 <template>
-  <div v-if="visible" class="fixed bottom-6 right-6 z-50 animate-fade-in">
+  <div v-if="visible" class="fixed bottom-24 right-6 z-50 animate-fade-in">
     <NotificationPromptCard @allow="handleAllow" @dismiss="handleDismiss" />
   </div>
 </template>

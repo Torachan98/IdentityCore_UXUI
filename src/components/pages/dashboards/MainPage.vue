@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useAuthStore } from '@/store/auth/auth'
 import Sidebar from '@/components/organisms/SidebarCustom.vue'
 import NotificationPermissionFloat from '@/components/organisms/NotificationPermissionFloat.vue'
+import FloatChatBoxMessage from '@/components/molecules/FloatChatBoxMessage.vue'
 
 const collapsed = ref(false)
 
@@ -30,5 +31,7 @@ const toggleSidebar = () => {
     </main>
 
     <NotificationPermissionFloat />
+
+    <FloatChatBoxMessage />
   </div>
 </template>
