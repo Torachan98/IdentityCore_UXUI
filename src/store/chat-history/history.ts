@@ -16,11 +16,11 @@ export const useHistoryChatStore = defineStore('history-chat', {
   }),
 
   actions: {
-    async fetchHistoryChat(): Promise<void> {
+    async fetchHistoryChat(userId: string): Promise<void> {
       this.loading = true
       this.error = null
       try {
-        const res = await externalApi.get('/history-chat')
+        const res = await externalApi.get(`/history-chat?id=${userId}`)
         const data = res.data as HistoryResponse
 
         if (data.isSuccess) {
@@ -47,7 +47,7 @@ export const useHistoryChatStore = defineStore('history-chat', {
         const data = res.data as HistoryResponse
 
         if (data.isSuccess) {
-          await this.fetchHistoryChat()
+          await this.fetchHistoryChat(userId)
         }
 
         // if (data.isSuccess) {

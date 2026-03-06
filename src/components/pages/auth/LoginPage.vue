@@ -66,12 +66,14 @@ const goSignUp = (): void => {
       <Input
         class="border border-gray-600 p-1"
         icon="user"
+        @keyup.enter="handleLogin"
         placeholder="User name or Email"
         v-model="username"
       />
 
       <Input
         class="border border-gray-600 p-1"
+        @keyup.enter="handleLogin"
         icon="lock"
         type="password"
         placeholder="Password"

@@ -14,7 +14,7 @@ const historyChatStore = useHistoryChatStore()
 const authStore = useAuthStore()
 
 onMounted(() => {
-  historyChatStore.fetchHistoryChat()
+  historyChatStore.fetchHistoryChat(authStore.userToken?.userId ?? '')
 })
 
 const toggleChat = async (): Promise<void> => {
