@@ -2,7 +2,7 @@
 import { useAuthStore } from '@/store/auth/auth'
 import { useHistoryChatStore } from '@/store/chat-history/history'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
 const open = ref<boolean>(false)
 const input = ref<string>('')
@@ -19,6 +19,11 @@ onMounted(() => {
 
 const toggleChat = async (): Promise<void> => {
   open.value = !open.value
+
+  if (open.value) {
+    await nextTick()
+    scrollToBottom()
+  }
   //   if (open.value && historyChatStore.messages?.length === 0) {
   //     await historyChatStore.fetchHistoryChat()
   //   }
@@ -28,7 +33,7 @@ const toggleChat = async (): Promise<void> => {
 //   loading.value = true
 //   try {
 //     messages.value = historyChatStore.messages ?? []
-//     await scrollToBottom()
+//
 //   } catch (e) {
 //     console.error(e)
 //   } finally {
@@ -47,7 +52,7 @@ const sendMessage = async (): Promise<void> => {
       message: question,
     })
 
-    //await scrollToBottom()
+    await scrollToBottom()
   } catch (e) {
     console.error(e)
   } finally {
@@ -55,12 +60,12 @@ const sendMessage = async (): Promise<void> => {
   }
 }
 
-// const scrollToBottom = async (): Promise<void> => {
-//   await nextTick()
-//   if (messagesContainer.value) {
-//     messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-//   }
-// }
+const scrollToBottom = async (): Promise<void> => {
+  await nextTick()
+  if (messagesContainer.value) {
+    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+  }
+}
 </script>
 
 <template>
@@ -72,7 +77,7 @@ const sendMessage = async (): Promise<void> => {
       <FontAwesomeIcon icon="message" />
     </button>
 
-    <transition name="fade">
+    <Transition name="fade">
       <div
         v-if="open"
         class="fixed bottom-24 right-6 w-80 max-h-[70vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50"
@@ -126,7 +131,7 @@ const sendMessage = async (): Promise<void> => {
           </button>
         </div>
       </div>
-    </transition>
+    </Transition>
   </div>
 </template>
 
